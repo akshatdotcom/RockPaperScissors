@@ -25,32 +25,41 @@ function convertToWord(letter) {
     return "Scissors";
 }
 
+const smallUserWord = "user".fontsize(3).sub();
+const smallCompWord = "comp".fontsize(3).sub();
+
+const glowTimeout = 350;
+
+function getUserChoiceDiv(userChoice) {
+    return document.getElementById(userChoice);
+}
+
 function win(userChoice, computerChoice) {
     userScore++;
     updateScores();
-    const smallUserWord = "user".fontsize(3).sub();
-    const smallCompWord = "comp".fontsize(3).sub();
+    const userChoice_div = getUserChoiceDiv(userChoice);
+    const greenGlow = 'green-glow';
     result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} beats ${convertToWord(computerChoice)}${smallCompWord}. You win! 🔥`;
-    document.getElementById(userChoice).classList.add('green-glow');
-    setTimeout(() => document.getElementById(userChoice).classList.remove('green-glow'), 500);
+    userChoice_div.classList.add(greenGlow);
+    setTimeout(() => userChoice_div.classList.remove(greenGlow), glowTimeout);
 }
 
 function lose(userChoice, computerChoice) {
     computerScore++;
     updateScores();
-    const smallUserWord = "user".fontsize(3).sub();
-    const smallCompWord = "comp".fontsize(3).sub();
+    const userChoice_div = getUserChoiceDiv(userChoice);
+    const redGlow = 'red-glow';
     result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} loses to ${convertToWord(computerChoice)}${smallCompWord}. You lost... 💩`;
-    document.getElementById(userChoice).classList.add('red-glow');
-    setTimeout(() => document.getElementById(userChoice).classList.remove('red-glow'), 500);
+    userChoice_div.classList.add(redGlow);
+    setTimeout(() => userChoice_div.classList.remove(redGlow), glowTimeout);
 }
 
 function draw(userChoice, computerChoice) {
-    const smallUserWord = "user".fontsize(3).sub();
-    const smallCompWord = "comp".fontsize(3).sub();
+    const userChoice_div = getUserChoiceDiv(userChoice);
+    const grayGlow = 'gray-glow';
     result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} equals ${convertToWord(computerChoice)}${smallCompWord}. It's a draw.`;
-    document.getElementById(userChoice).classList.add('gray-glow');
-    setTimeout(() => document.getElementById(userChoice).classList.remove('gray-glow'), 500);
+    userChoice_div.classList.add(grayGlow);
+    setTimeout(() => userChoice_div.classList.remove(grayGlow), glowTimeout);
 }
 
 function game(userChoice) {
